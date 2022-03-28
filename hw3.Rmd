@@ -13,6 +13,21 @@ library(tidyverse)
 
 Import data
 ```{r}
-data = read.table(file="PCA_data.csv", header=TRUE, row.names=1, sep=",") 
+data = read.table(file="PCA_data.csv", header=TRUE, row.names=1, sep=",")
+```
+
+PCA fitting and exploration
+```{r}
 data_pca = prcomp(data, retx=TRUE, center=TRUE, scale=TRUE)
+sd = data_pca$sdev
+loadings = data_pca$rotation
+scores = data_pca$x
+rownames(loadings) = colnames(data)
+plot(scores[,1:2], 
+     xlim=c(min(scores[,1:2]),
+            max(scores[,1:2])),
+     ylim=c(min(scores[,1:2]),
+            max(scores[,1:2])))
+text(scores[,1], scores[,2], rownames(scores), col="blue", cex=0.7, pos=3)
+screeplot(data_pca, type="lines")
 ```
