@@ -1,0 +1,18 @@
+---
+title: "P8139 HW3"
+author: "Brian Jo Hsuan Lee"
+date: "3/28/2022"
+output: pdf_document
+---
+
+Load packages
+```{r}
+library(tidyverse)
+```
+
+
+Import data
+```{r}
+data = read.table(file="PCA_data.csv", header=TRUE, row.names=1, sep=",") 
+data_pca = prcomp(data, retx=TRUE, center=TRUE, scale=TRUE)
+```
